@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array Practice</title>
+</head>
+<body>
+  <p><em>Check the JavaScript Console for the results</em></p>
+
+  <script>
+    // --------------------
+    // DATA
+    // --------------------
+    const scientists = [
+      { firstName: 'Albert', lastName: 'Einstein', birthYear: 1879, deathYear: 1955 },
+      { firstName: 'Isaac', lastName: 'Newton', birthYear: 1643, deathYear: 1727 },
+      { firstName: 'Galileo', lastName: 'Galilei', birthYear: 1564, deathYear: 1642 },
+      { firstName: 'Marie', lastName: 'Curie', birthYear: 1867, deathYear: 1934 },
+      { firstName: 'Johannes', lastName: 'Kepler', birthYear: 1571, deathYear: 1630 },
+      { firstName: 'Nicolaus', lastName: 'Copernicus', birthYear: 1473, deathYear: 1543 },
+      { firstName: 'Max', lastName: 'Planck', birthYear: 1858, deathYear: 1947 },
+      { firstName: 'Katherine', lastName: 'Blodgett', birthYear: 1898, deathYear: 1979 },
+      { firstName: 'Ada', lastName: 'Lovelace', birthYear: 1815, deathYear: 1852 },
+      { firstName: 'Sarah E.', lastName: 'Goode', birthYear: 1855, deathYear: 1905 },
+      { firstName: 'Lise', lastName: 'Meitner', birthYear: 1878, deathYear: 1968 },
+      { firstName: 'Hanna', lastName: 'Hammarström', birthYear: 1829, deathYear: 1909 }
+    ];
+
+    const peopleNames = [
+      'Bernhard, Sandra', 'Bethea, Erin', 'Becker, Carl', 'Bentsen, Lloyd', 
+      'Beckett, Samuel', 'Blake, William', 'Berger, Ric', 'Beddoes, Mick', 
+      'Beethoven, Ludwig', 'Belloc, Hilaire', 'Begin, Menachem', 'Bellow, Saul', 
+      'Benchley, Robert', 'Blair, Robert', 'Benenson, Peter', 'Benjamin, Walter',
+      'Berlin, Irving', 'Benn, Tony', 'Benson, Leana', 'Bent, Silas', 
+      'Berle, Milton', 'Berry, Halle', 'Biko, Steve', 'Beck, Glenn', 
+      'Bergman, Ingmar', 'Black, Elk', 'Berio, Luciano', 'Berne, Eric', 
+      'Berra, Yogi', 'Berry, Wendell', 'Bevan, Aneurin', 'Ben-Gurion, David', 
+      'Bevel, Ken', 'Biden, Joseph', 'Bennington, Chester', 'Bierce, Ambrose',
+      'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 
+      'Beecher, Henry', 'Biondo, Frank'
+    ];
+
+    // --------------------
+    // 1. Scientists born in the 1500s
+    // --------------------
+    const bornIn1500s = scientists.filter(scientist => {
+      return scientist.birthYear >= 1500 && scientist.birthYear < 1600;
+    });
+    console.log("Scientists born in 1500s:", bornIn1500s);
+
+    // --------------------
+    // 2. List of full names
+    // --------------------
+    const scientistFullNames = scientists.map(scientist => {
+      return scientist.firstName + " " + scientist.lastName;
+    });
+    console.log("Full Names:", scientistFullNames);
+
+    // --------------------
+    // 3. Sort scientists by birth year (oldest to youngest)
+    // --------------------
+    const sortByBirthYear = scientists.sort((a, b) => {
+      return a.birthYear - b.birthYear;
+    });
+    console.log("Sorted by Birth Year:", sortByBirthYear);
+
+    // --------------------
+    // 4. Total years all scientists lived
+    // --------------------
+    const totalLifespan = scientists.reduce((total, scientist) => {
+      return total + (scientist.deathYear - scientist.birthYear);
+    }, 0);
+    console.log("Total Years Lived by All Scientists:", totalLifespan);
+
+    // --------------------
+    // 5. Sort scientists by years lived (longest first)
+    // --------------------
+    const sortByAge = scientists.sort((a, b) => {
+      const ageA = a.deathYear - a.birthYear;
+      const ageB = b.deathYear - b.birthYear;
+      return ageB - ageA;
+    });
+    console.log("Sorted by Years Lived:", sortByAge);
+
+    // --------------------
+    // 6. Sort people alphabetically by last name
+    // --------------------
+    const sortPeopleByLastName = peopleNames.sort((a, b) => {
+      const lastNameA = a.split(", ")[0];
+      const lastNameB = b.split(", ")[0];
+      return lastNameA.localeCompare(lastNameB);
+    });
+    console.log("People Sorted by Last Name:", sortPeopleByLastName);
+
+    // --------------------
+    // 7. Count occurrences of each item in array
+    // --------------------
+    const transportModes = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 
+                            'car', 'van', 'bike', 'walk', 'car', 'van', 
+                            'car', 'truck', 'pogostick'];
+
+    const transportCount = transportModes.reduce((count, item) => {
+      if (!count[item]) {
+        count[item] = 1;
+      } else {
+        count[item] += 1;
+      }
+      return count;
+    }, {});
+    console.log("Transport Count:", transportCount);
+
+  </script>
+</body>
+</html>
