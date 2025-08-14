@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Style Controller</title>
+  <link rel="icon" href="https://fav.farm/✅" />
+</head>
+<body>
+  <h2>Update Image Style with <span class='highlight-text'>JavaScript</span></h2>
+
+  <div class="settings-panel">
+    <label for="imgPadding">Spacing:</label>
+    <input id="imgPadding" type="range" name="spacing" min="10" max="200" value="10" data-unit="px">
+
+    <label for="imgBlur">Blur:</label>
+    <input id="imgBlur" type="range" name="blur" min="0" max="25" value="10" data-unit="px">
+
+    <label for="baseColor">Base Color:</label>
+    <input id="baseColor" type="color" name="base" value="#ffc600">
+  </div>
+
+  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+
+  <style>
+    :root {
+      --base: #ff0000;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .highlight-text {
+      color: var(--base);
+    }
+
+    body {
+      text-align: center;
+      background: #024d3a;
+      color: white;
+      font-family: 'helvetica neue', sans-serif;
+      font-weight: 100;
+      font-size: 50px;
+    }
+
+    .settings-panel {
+      margin-bottom: 50px;
+    }
+
+    input {
+      width: 100px;
+    }
+  </style>
+
+  <script>
+    const styleControls = document.querySelectorAll('.settings-panel input');
+
+    function applyStyleChanges() {
+      const unitType = this.getAttribute('data-unit') || '';
+      const cssVarName = `--${this.name}`;
+      const cssVarValue = this.value + unitType;
+      document.documentElement.style.setProperty(cssVarName, cssVarValue);
+    }
+
+    styleControls.forEach(control => {
+      control.addEventListener('input', applyStyleChanges);
+    });
+  </script>
+</body>
+</html>
