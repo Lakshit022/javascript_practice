@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Copy vs Reference</title>
+</head>
+<body>
+
+<script>
+  // -----------------------------
+  // Copying Primitive Values
+  // -----------------------------
+  let number1 = 50;
+  let number2 = number1; // copy of number1
+  number1 = 100;
+
+  console.log("Primitive values:");
+  console.log("number1:", number1); // 100
+  console.log("number2:", number2); // 50
+
+  let string1 = "Hello";
+  let string2 = string1;
+  string1 = "Hi";
+
+  console.log("string1:", string1); // Hi
+  console.log("string2:", string2); // Hello
+
+  // -----------------------------
+  // Copying Arrays
+  // -----------------------------
+  const fruits = ["apple", "banana", "cherry"];
+
+  // Wrong way: both variables point to same array
+  const basket = fruits;
+  basket.push("mango");
+
+  console.log("\nArray reference:");
+  console.log("fruits:", fruits); // ["apple", "banana", "cherry", "mango"]
+  console.log("basket:", basket); // same as fruits
+
+  // Correct way: make a copy
+  const basketCopy = [...fruits]; // using spread operator
+  basketCopy.push("grape");
+
+  console.log("\nArray copy:");
+  console.log("fruits:", fruits);       // original stays the same
+  console.log("basketCopy:", basketCopy); // new array has grape
+
+  // -----------------------------
+  // Copying Objects
+  // -----------------------------
+  const user = {
+    name: "Alice",
+    age: 25,
+  };
+
+  // Wrong way: reference copy
+  const admin = user;
+  admin.age = 30;
+
+  console.log("\nObject reference:");
+  console.log("user:", user);   // age changed
+  console.log("admin:", admin); // same object
+
+  // Correct way: shallow copy
+  const adminCopy = { ...user, role: "admin" };
+  adminCopy.age = 35;
+
+  console.log("\nObject copy:");
+  console.log("user:", user);        // original unchanged
+  console.log("adminCopy:", adminCopy); // new object has updated age & role
+
+  // -----------------------------
+  // Deep Copy for Nested Objects
+  // -----------------------------
+  const person = {
+    name: "Bob",
+    age: 40,
+    social: {
+      twitter: "@bob",
+      facebook: "bob.page"
+    }
+  };
+
+  // Deep copy using JSON
+  const personCopy = JSON.parse(JSON.stringify(person));
+  personCopy.social.twitter = "@newbob";
+
+  console.log("\nDeep copy:");
+  console.log("person:", person.social.twitter);       // original unchanged
+  console.log("personCopy:", personCopy.social.twitter); // copied object changed
+
+</script>
+
+</body>
+</html>
