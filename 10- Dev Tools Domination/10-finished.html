@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Console Tricks!</title>
+  <link rel="icon" href="https://fav.farm/✅" />
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'Hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log('Hello there!');
+
+    // Interpolated
+    console.log('This is a %s message.', 'simple');
+
+    // warning!
+    console.warn('Watch out!');
+
+    // Error :|
+    console.error('Oops! Something went wrong.');
+
+    // Info
+    console.info('Crocodiles eat 3-4 people per year');
+
+    // Testing
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('ouch'), 'Class "ouch" is missing.');
+
+    // Viewing DOM Elements
+    console.log(p);
+    console.dir(p);
+
+    // Grouping together
+    dogs.forEach(function(dog) {
+      console.groupCollapsed(dog.name);
+      console.log('Name: ' + dog.name);
+      console.log('Age: ' + dog.age);
+      console.log('Age in dog years: ' + (dog.age * 7));
+      console.groupEnd();
+    });
+
+    // counting
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Wes');
+
+    // timing
+    console.time('fetching data');
+    fetch('https://api.github.com/users/wesbos')
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        console.timeEnd('fetching data');
+        console.log(data);
+      });
+
+    // table
+    console.table(dogs);
+
+  </script>
+</body>
+</html>
